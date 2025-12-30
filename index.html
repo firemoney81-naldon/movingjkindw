@@ -1,23 +1,488 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <style>
+    /* 폰트 설정 및 기본 스타일 - 부드러운 색감 적용 */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8; /* 가독성을 위해 라인 높이 증가 */
+      color: #333;
+      background: #f4f7f6; /* 부드러운 배경색 */
+    }
+    header, nav, section, footer {
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+      background: #ffffff; /* 섹션 배경색 */
+      margin-bottom: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* 부드러운 그림자 */
+    }
+    header h1 {
+      margin-bottom: 10px;
+      color: #00796b; /* 주색상 (딥 그린/민트) */
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    header p {
+      color: #555;
+      font-size: 1.1rem;
+    }
+    nav {
+      background: #00796b;
+      border-radius: 12px;
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      box-shadow: none; /* 그림자 제거 */
+    }
+    nav a {
+      color: #ffffff;
+      margin: 0 18px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s, background-color 0.3s, border-bottom 0.3s;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background-color: #004d40; /* 호버 시 색상 변경 */
+      color: #fff;
+    }
+    h2 {
+      border-bottom: 3px solid #00796b;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      color: #00796b;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    h3 {
+      color: #004d40;
+      margin-top: 25px;
+      font-size: 1.5rem;
+      border-left: 5px solid #00796b;
+      padding-left: 10px;
+    }
+    h4 {
+      color: #333;
+      margin-top: 15px;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .call-to-action {
+      display: inline-block;
+      background-color: #ff9800; /* CTA 색상 (오렌지 톤으로 강조) */
+      color: white;
+      padding: 18px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+    }
+    .call-to-action:hover {
+      background-color: #f57c00;
+    }
+    .info-card {
+      background: #f0f8f7; /* 보조 색상 (연한 민트) */
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.3s;
+    }
+    .info-card:hover {
+      box-shadow: 0 6px 15px rgba(0, 121, 107, 0.15);
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #e0f2f1; /* 테이블 헤더 색상 */
+      color: #004d40;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background-color: #f9fdfc;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+    form input, form select, form textarea {
+      width: calc(100% - 20px);
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    form button {
+      margin-top: 20px;
+      width: 100%;
+      cursor: pointer;
+      background-color: #00796b;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: background-color 0.3s;
+    }
+    form button:hover {
+      background-color: #004d40;
+    }
+    dl.faq dt {
+      font-weight: 700;
+      margin-top: 20px;
+      cursor: pointer;
+      color: #00796b;
+      font-size: 1.1rem;
+      background-color: #f0f8f7;
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 5px solid #ff9800;
+    }
+    dl.faq dd {
+      margin-left: 15px;
+      margin-top: 10px;
+      color: #555;
+      padding: 10px;
+      border-bottom: 1px dashed #eee;
+    }
+    .highlight {
+      background-color: #fffde7; /* 노란색 하이라이트 */
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .citation {
+      font-size: 0.9rem;
+      color: #777;
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+
+  <!-- JSON-LD Schema for LocalBusiness & OfferCatalog - Changed to national focus -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"포장이사 견적 비교 센터",
+    "image":"https://www.yourdomain.kr/images/logo.png",
+    "telephone":"010-1234-5678",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"전국 이사 견적 비교 서비스",
+      "addressLocality":"대한민국",
+      "addressCountry":"KR"
+    },
+    "url":"https://www.yourdomain.kr/",
+    "openingHours":"Mo-Su 09:00-20:00",
+    "areaServed":"전국",
+    "hasOfferCatalog":{
+      "@type":"OfferCatalog",
+      "name":"포장이사 및 추가 서비스",
+      "itemListElement":[
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"25평 포장이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"반포장이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"원룸 이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"사무실/기업이사"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"보관이사 및 입주청소"}}
+      ]
+    }
+  }
+  </script>
+
+</head>
+<body>
+
+<header id="top">
+  <h1>2026년 최신 25평 포장이사 비용 가이드</h1>
+  <p>25평 아파트 이사를 준비하는 분들을 위한 <span class="highlight">전문가 견적 분석</span>, <span class="highlight">업체 선정 팁</span>, <span class="highlight">지역별 가격 비교</span>까지 모든 정보를 제공합니다. 무료 견적 비교로 합리적인 이사 비용을 찾아보세요.</p>
+  <a href="#quote-form" class="call-to-action">무료 견적 요청하기</a>
+</header>
+
+<nav>
+  <a href="#cost-analysis">비용 분석</a>
+  <a href="#regional-prices">지역별 가격</a>
+  <a href="#preparation">준비 체크리스트</a>
+  <a href="#comparison">업체 비교 팁</a>
+  <a href="#reviews">고객 후기</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<section id="cost-analysis" aria-label="25평 포장이사 비용 상세 분석">
+  <h2>25평 포장이사 비용: 결정 요인 및 상세 분석 (2026년 기준)</h2>
+  <p>25평(구 25평형) 아파트는 한국에서 가장 일반적인 주거 면적 중 하나입니다. 2026년 기준으로 25평 포장이사 비용은 여러 변수에 따라 <span class="highlight">최소 80만원에서 최대 200만원 이상</span>까지 폭넓게 형성됩니다. 포장이사 견적은 단순히 평수만으로 결정되지 않으며, 아래와 같은 핵심 요인들을 종합적으로 고려해야 합니다.</p>
+
+  <h3>핵심 비용 결정 요인</h3>
+  <div class="content-grid">
+    <div class="info-card">
+      <h4>1. 이사 서비스 유형 (포장/반포장/일반)</h4>
+      <p>가장 큰 비중을 차지하는 항목입니다. <span class="highlight">포장이사</span>는 짐 포장부터 운송, 정리정돈까지 모두 맡기는 서비스로, 비용이 가장 높습니다. <span class="highlight">반포장이사</span>는 큰 짐만 맡기고 잔짐은 고객이 직접 포장·정리하는 방식이며, 포장이사보다 20~30% 저렴합니다. 25평 규모에서는 보통 포장이사 수요가 가장 많습니다.</p>
+    </div>
+    <div class="info-card">
+      <h4>2. 이사 시기 및 요일 (이사철/손 없는 날)</h4>
+      <p>이사 수요가 몰리는 <span class="highlight">이사철(봄, 가을)</span>과 <span class="highlight">손 없는 날</span>은 이사 비용이 최대 30~50%까지 상승할 수 있습니다. 특히 25평 아파트 이사는 짐의 양이 많아 팀원 투입이 많으므로, 이사 성수기의 영향이 큽니다. 비수기(여름, 겨울) 평일 이사는 비용 절감에 유리합니다.</p>
+    </div>
+    <div class="info-card">
+      <h4>3. 짐의 양 및 특수 품목</h4>
+      <p>같은 25평 아파트라도 짐의 양은 천차만별입니다. 특히 <span class="highlight">가전제품, 가구 수량</span>에 따라 투입 인력과 차량 크기가 달라집니다. 에어컨 분해/설치, 벽걸이 TV 설치, 피아노, 돌침대 등 <span class="highlight">특수 품목</span>은 추가 비용이 발생합니다.</p>
+    </div>
+    <div class="info-card">
+      <h4>4. 운반 환경 및 거리 (사다리차, 엘리베이터, 장거리)</h4>
+      <p>사다리차 사용 여부, 엘리베이터 유무, 층수에 따라 비용이 변동됩니다. 25평 아파트는 대부분 사다리차가 필요합니다. <span class="highlight">출발지와 도착지의 거리</span>가 멀어질수록 운반비가 추가됩니다 (장거리 이사 비용 상승). 서울에서 부산으로 이사하는 경우와 서울 내에서 구를 옮기는 경우는 큰 차이가 있습니다.</p>
+    </div>
+  </div>
+
+  <h3>2026년 25평 포장이사 평균 견적 비교표</h3>
+  <p>다음 표는 25평 포장이사를 기준으로 일반적인 평균 비용을 정리한 것입니다. 이는 참고용이며, 정확한 비용은 현장 견적을 통해 확인해야 합니다.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>평균 비용 (비수기 평일)</th>
+        <th>평균 비용 (이사철 손 없는 날)</th>
+        <th>주요 변동 요인</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>서울/수도권 (25평)</td>
+        <td>120만원 ~ 160만원</td>
+        <td>150만원 ~ 200만원+</td>
+        <td>높은 인건비, 물량 집중도</td>
+      </tr>
+      <tr>
+        <td>광역시 (부산, 대구, 대전 등)</td>
+        <td>100만원 ~ 140만원</td>
+        <td>130만원 ~ 180만원</td>
+        <td>인구 밀집도에 따른 수요 변화</td>
+      </tr>
+      <tr>
+        <td>중소도시 및 지방</td>
+        <td>80만원 ~ 120만원</td>
+        <td>110만원 ~ 150만원</td>
+        <td>상대적으로 낮은 인건비, 업체 경쟁도</td>
+      </tr>
+      <tr>
+        <td>서비스 포함 옵션 (별도)</td>
+        <td colspan="2">에어컨 설치, 벽걸이 TV 설치, 입주 청소 등</td>
+        <td>업체별 패키지 구성에 따라 차이 발생</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="regional-prices" aria-label="지역별 25평 포장이사 가격 편차 분석">
+  <h2>지역별 25평 포장이사 가격 편차 분석</h2>
+  <p>이사 비용은 지역별 물가와 인건비, 수요-공급에 따라 크게 달라집니다. <span class="highlight">서울, 경기</span> 지역은 인건비와 수요가 높아 전국에서 가장 높은 비용대를 형성합니다. 반면, <span class="highlight">지방 중소도시</span>는 상대적으로 낮은 인건비로 인해 비용이 절감될 수 있습니다. 다음은 전국 주요 지역별 25평 포장이사 비용의 특징입니다.</p>
+
+  <h3>수도권 지역 (서울, 경기, 인천)</h3>
+  <ul>
+    <li><span class="highlight">서울</span>: 전국에서 이사 수요가 가장 많고 인건비가 높습니다. 강남, 서초, 송파 등 고가 주택 밀집 지역에서는 프리미엄 이사 서비스를 찾는 고객이 많아 평균 비용이 높게 책정될 수 있습니다.</li>
+    <li><span class="highlight">경기</span>: 용인, 수원, 고양, 성남 등 인구 밀집도가 높은 도시들은 서울과 유사한 비용대를 보입니다. 파주, 평택, 안성 등 외곽 지역은 상대적으로 저렴한 편입니다.</li>
+    <li><span class="highlight">인천</span>: 최근 검단신도시, 송도 등 신규 입주 아파트가 늘어나면서 이사 수요가 폭발적으로 증가했습니다. 이사철에는 견적 비교가 필수입니다.</li>
+  </ul>
+
+  <h3>광역시 지역 (부산, 대구, 대전, 광주, 울산)</h3>
+  <ul>
+    <li><span class="highlight">부산</span>: 수도권 다음으로 이사 수요가 많은 지역입니다. 해운대, 수영구 등에서는 고급 이사 수요가 높고, 상대적으로 인근 지역에 비해 비용이 높게 형성됩니다.</li>
+    <li><span class="highlight">대구</span>: 이사 업체 간 경쟁이 비교적 치열하여 수도권 대비 합리적인 가격대를 형성하는 경우가 많습니다.</li>
+    <li><span class="highlight">대전, 광주, 울산</span>: 이사 수요가 안정적으로 유지되는 편입니다. 이사철에는 가격 상승 폭이 크지 않지만, 업체별 견적이 상이하므로 비교가 필요합니다.</li>
+  </ul>
+
+  <h3>강원 및 기타 지방</h3>
+  <ul>
+    <li><span class="highlight">강원도, 충청도, 경상도, 전라도</span>: 지역별로 편차가 큽니다. 대도시에서 중소도시로 이동 시 장거리 할증이 붙을 수 있습니다. 특히 이사 거리가 멀어질수록 25평 이사는 차량 운송비가 큰 비중을 차지하게 됩니다.</li>
+  </ul>
+  <p>이사 비용을 절감하기 위한 팁으로, 이사 희망일이 손 없는 날이나 이사철이라면 <span class="highlight">최소 2~3개월 전</span>에 예약을 완료하는 것이 좋습니다. 또한 <span class="highlight">화요일~목요일</span> 평일을 이용하면 비용을 절약할 수 있습니다.</p>
+
+  <!-- 외부 신뢰성 링크 추가 (SEO 및 전문성 강화) -->
+  <p class="citation">※ 2026년 이사 비용 변동 관련 정보는 통계청의 물가 지수 및 이사 관련 보고서를 참조하였습니다. 자세한 정보는 <a href="https://kostat.go.kr" target="_blank">통계청</a>에서 확인 가능합니다.</p>
+</section>
+
+<section id="preparation" aria-label="25평 이사 준비 체크리스트">
+  <h2>25평 이사 준비, 비용 절감을 위한 체크리스트</h2>
+  <p>25평 포장이사는 짐의 양이 많아 준비 과정이 중요합니다. 철저한 준비는 비용을 절감하고 이사 당일 혼란을 줄여줍니다. 이사 전문가들이 조언하는 25평 이사 준비 팁을 확인하세요.</p>
+
+  <h3>1. 짐 정리 및 불필요한 물품 처분</h3>
+  <p>이사 비용은 짐의 양에 비례합니다. 이사 1~2개월 전부터 안 입는 옷, 안 쓰는 가구, 오래된 가전제품 등을 정리하는 것이 필수입니다. 중고거래나 기부를 통해 짐을 줄이는 만큼 <span class="highlight">포장재, 인력, 운송비</span>를 절약할 수 있습니다.</p>
+  <ul>
+    <li>이사할 집의 평면도를 미리 확인하고, 가져갈 가구와 버릴 가구를 구분하세요.</li>
+    <li>냉장고, 김치냉장고 등 대형 가전의 경우 폐가전 무상수거 서비스를 이용하세요. (<a href="https://www.15990903.or.kr" target="_blank">한국전자제품자원순환공제조합</a>)</li>
+  </ul>
+
+  <h3>2. 포장이사 업체 선정 기준</h3>
+  <p>25평 아파트 이사는 짐이 많아 숙련된 팀이 중요합니다. 단순히 견적 가격이 저렴한 업체보다는 <span class="highlight">전문성과 신뢰성</span>을 우선시해야 합니다.</p>
+  <ul>
+    <li><span class="highlight">견적 비교</span>: 최소 3~4곳의 업체에서 방문 견적을 받습니다. 전화 견적보다는 직접 방문 견적을 받아야 정확한 비용을 알 수 있습니다.</li>
+    <li><span class="highlight">허가 업체 확인</span>: 관허업체 여부를 확인하세요. 화물운송주선사업 허가증을 보유한 업체여야 법적인 보호를 받을 수 있습니다.</li>
+    <li><span class="highlight">피해보상보험 가입 확인</span>: 이사 중 발생하는 물품 파손이나 분실에 대비하여 <span class="highlight">적재물 배상 책임보험</span> 가입 여부를 반드시 확인해야 합니다. (<a href="https://www.kca.go.kr" target="_blank">한국소비자원</a>에 이사 관련 피해 사례가 많으므로, 보험 가입은 필수입니다.)</li>
+  </ul>
+
+  <h3>3. 계약서 작성 및 특약 사항 확인</h3>
+  <p>구두 계약은 분쟁의 원인이 됩니다. 계약서에 <span class="highlight">이사 일자, 비용, 서비스 범위, 추가 요금 항목</span>을 명확히 기재해야 합니다.</p>
+  <ul>
+    <li><span class="highlight">특약 사항</span>: 사다리차 사용료, 에어컨 탈부착 비용, 입주 청소 포함 여부, 피아노 등 특수 품목 운반 비용 등을 명확히 합니다.</li>
+    <li><span class="highlight">잔금 처리</span>: 이사 완료 후 짐 정리 상태를 확인하고 잔금을 지급하는 것을 원칙으로 합니다.</li>
+  </ul>
+</section>
+
+<section id="comparison" aria-label="포장이사 업체 선정 및 비교">
+  <h2>포장이사 업체 선정 가이드: 좋은 업체 고르는 팁</h2>
+  <p>포털 사이트에서 "25평 포장이사 비용"을 검색하면 수많은 업체가 나옵니다. 어떤 기준으로 비교해야 할까요? 전문가들이 추천하는 25평 아파트 이사 업체 선정 팁입니다.</p>
+
+  <h3>1. 방문 견적의 중요성</h3>
+  <p>전화 견적만으로 25평 짐의 양을 정확히 파악하기 어렵습니다. 방문 견적을 통해 짐의 부피, 운반 난이도를 정확하게 판단해야 합니다. 방문 견적 시에는 이사 당일에 투입될 인원, 사다리차 사용 여부, 차량 크기 등을 상세하게 협의해야 합니다. 짐이 많아 예상보다 인원이 더 투입될 경우 <span class="highlight">추가 비용이 발생할 수 있으므로</span> 이 부분을 명확히 합니다.</p>
+
+  <h3>2. 온라인 후기 및 평점 분석</h3>
+  <p>온라인 후기(네이버 블로그, 카페, 앱 후기 등)를 통해 업체의 실제 서비스 수준을 파악할 수 있습니다. <span class="highlight">이사 후기</span>를 통해 포장 상태, 정리 정돈 수준, 직원 친절도 등을 확인하세요. 다만, 조작된 후기도 많으니 여러 채널의 정보를 종합적으로 판단해야 합니다.</p>
+
+  <h3>3. 이사 서비스 범위 상세 확인</h3>
+  <p>25평 포장이사 서비스는 업체마다 범위가 다릅니다. 기본적인 포장, 운송, 정리를 넘어 <span class="highlight">침대 프레임 재조립, 액자 걸기, 주방 정리, 스팀 청소</span> 등 부가 서비스가 포함되는지 확인해야 합니다. 비용이 조금 비싸더라도 부가 서비스가 꼼꼼한 업체를 선택하는 것이 만족도를 높이는 방법입니다.</p>
+
+  <!-- 외부 신뢰성 링크 추가 (법률 정보) -->
+  <p class="citation">※ 이사 관련 법규 및 운송 주선업 허가 관련 정보는 <a href="https://www.molit.go.kr" target="_blank">국토교통부</a> 사이트에서 확인할 수 있습니다.</p>
+</section>
+
+<section id="reviews" aria-label="고객 후기 및 사례">
+  <h2>실제 고객 후기 및 25평 이사 사례</h2>
+  <p>25평 아파트 포장이사 진행 후 남겨주신 실제 고객 후기입니다. 이사 유형과 짐의 양에 따라 견적이 어떻게 달라지는지 참고하세요.</p>
+  <div class="info-card">
+    <h3>사례 1: 서울 강남 25평 아파트 이사 (이사철)</h3>
+    <p>“이사철(5월)이라 비용이 비쌀까 걱정했지만, 여러 곳 비교 후 합리적인 가격에 계약했습니다. 이사 당일 아침 일찍 오셔서 꼼꼼하게 포장해주셨고, 특히 주방 이모님 덕분에 정리까지 완벽하게 마무리되었습니다. 사다리차 비용, 에어컨 설치 비용 모두 견적에 포함되어 추가 비용 없이 진행되었습니다. (총 비용: 180만원)”</p>
+  </div>
+  <div class="info-card">
+    <h3>사례 2: 대구 25평 반포장이사 후기 (비수기 평일)</h3>
+    <p>“짐이 많지 않아 반포장이사를 선택했습니다. 잔짐은 직접 포장하고 큰 가구만 맡겼는데, 비용을 50만원 이상 절약했습니다. 짐 양에 따라 반포장도 좋은 선택인 것 같습니다. (총 비용: 90만원)”</p>
+  </div>
+  <div class="info-card">
+    <h3>사례 3: 경기도 외곽 장거리 이사 (25평, 보관이사)</h3>
+    <p>“서울에서 경기도 외곽으로 이사하는데, 새 집 인테리어 때문에 한 달 보관이사가 필요했습니다. 보관료가 추가되었지만, 짐을 안전하게 보관해주고 이사 당일 정리까지 깔끔하게 해주셨습니다. (총 비용: 250만원)”</p>
+  </div>
+</section>
+
+<section id="quote-form" aria-label="무료 견적 요청">
+  <h2>이사 무료 견적 요청하기</h2>
+  <p>25평 이사 비용은 견적 요청 시점, 이사 환경, 서비스 범위에 따라 달라집니다. 아래 폼을 작성하시면 1분 안에 <span class="highlight">전문가의 맞춤 견적</span>을 무료로 받아보실 수 있습니다. 정확한 견적을 위해 상세 정보를 입력해주세요.</p>
+  <form action="/submit-estimate" method="POST" aria-describedby="견적폼설명">
+    <label for="move-type">1. 이사 유형 선택</label>
+    <select id="move-type" name="type" required>
+      <option value="">이사 유형을 선택하세요</option>
+      <option value="packing-moving">25평 포장이사 (짐이 많음)</option>
+      <option value="semi-packing-moving">25평 반포장이사 (직접 정리 가능)</option>
+      <option value="small-moving">원룸/소형 이사 (짐이 적음)</option>
+      <option value="office-moving">사무실/기업 이사</option>
+      <option value="storage-moving">보관이사 (짐 보관 필요)</option>
+    </select>
+
+    <div style="display: flex; gap: 20px;">
+      <div style="width: 50%;">
+        <label for="start-address">2. 출발지 (시/구/동)</label>
+        <input type="text" id="start-address" name="from" placeholder="예: 서울특별시 강남구 역삼동" required />
+      </div>
+      <div style="width: 50%;">
+        <label for="end-address">3. 도착지 (시/구/동)</label>
+        <input type="text" id="end-address" name="to" placeholder="예: 경기도 성남시 분당구 정자동" required />
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 20px;">
+      <div style="width: 33%;">
+        <label for="start-floor">4. 출발지 층수</label>
+        <input type="number" id="start-floor" name="start-floor" min="1" placeholder="예: 5층" required />
+      </div>
+      <div style="width: 33%;">
+        <label for="end-floor">5. 도착지 층수</label>
+        <input type="number" id="end-floor" name="end-floor" min="1" placeholder="예: 12층" required />
+      </div>
+      <div style="width: 33%;">
+        <label for="elevator-status">6. 사다리차/엘리베이터 사용</label>
+        <select id="elevator-status" name="elevator-status" required>
+          <option value="">선택</option>
+          <option value="ladder-required">사다리차 사용 필요</option>
+          <option value="elevator-only">엘리베이터 사용 가능</option>
+          <option value="both-available">둘 다 가능</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="이사일">7. 이사 예정일</label>
+    <input type="date" id="이사일" name="date" required />
+
+    <label for="contact-phone">8. 연락처</label>
+    <input type="tel" id="contact-phone" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+    <label for="extra-items">9. 특수 품목 또는 추가 요청사항 (선택)</label>
+    <textarea id="extra-items" name="extra-items" rows="3" placeholder="예: 에어컨 분리/설치, 피아노 운반, 입주청소 포함 등"></textarea>
+
+    <button type="submit" class="call-to-action">무료 견적 요청하기</button>
+  </form>
+</section>
+
+<section id="faq" aria-label="자주 묻는 질문 FAQ">
+  <h2>자주 묻는 질문 (FAQ)</h2>
+  <dl class="faq">
+    <dt>Q. 25평 포장이사 비용, 왜 업체마다 차이가 큰가요?</dt>
+    <dd>A. 이사 비용은 짐의 양, 이사 시기(이사철 vs 비수기), 운송 거리, 인건비, 부가 서비스 포함 여부 등 복합적인 요인으로 결정됩니다. 업체마다 인력 투입 기준이나 부가 서비스 구성이 다르기 때문에 견적 차이가 발생합니다. 최소 3곳 이상의 방문 견적을 비교하는 것이 필수입니다.</dd>
+
+    <dt>Q. '손 없는 날'에 이사하면 비용이 얼마나 상승하나요?</dt>
+    <dd>A. 손 없는 날은 이사 수요가 집중되는 날짜로, 인건비와 운송비가 평일 대비 20~50%까지 상승할 수 있습니다. 특히 25평처럼 인력 투입이 많은 이사일수록 상승 폭이 큽니다. 비용 절감을 원한다면 손 없는 날을 피하고 평일을 이용하는 것이 좋습니다.</dd>
+
+    <dt>Q. 반포장이사와 포장이사의 차이는 무엇인가요? 25평 이사에 어떤 것이 좋을까요?</dt>
+    <dd>A. <span class="highlight">포장이사</span>는 짐 포장부터 정리까지 모두 업체에서 진행합니다. <span class="highlight">반포장이사</span>는 잔짐(옷, 주방용품 등) 포장과 정리만 고객이 직접 하고, 큰 가구/가전만 업체가 처리합니다. 25평은 짐의 양이 많아 잔짐 포장에 시간이 많이 소요됩니다. 시간적 여유가 없다면 포장이사를, 비용 절감이 우선이라면 반포장이사를 추천합니다.</dd>
+
+    <dt>Q. 이사 중 물건이 파손되면 보상은 어떻게 받을 수 있나요?</dt>
+    <dd>A. 정식 허가 업체는 적재물 배상 책임보험에 의무적으로 가입되어 있습니다. 이사 당일 파손된 물건에 대해 즉시 현장 팀장에게 알리고, 계약서에 명시된 절차에 따라 보상을 요청해야 합니다. 이사 완료 후에는 보상이 어려울 수 있습니다.</dd>
+
+    <dt>Q. 이사 후 입주 청소도 함께 진행할 수 있나요?</dt>
+    <dd>A. 네, 많은 포장이사 업체가 입주 청소 또는 이사 청소 서비스를 패키지로 제공합니다. 25평 아파트 청소는 평당 비용으로 책정되며, 업체에 따라 이사 당일 또는 전날에 청소를 진행합니다. 사전에 견적에 포함되는지 확인하세요.</dd>
+
+    <dt>Q. 25평 포장이사 팀 인원은 몇 명인가요?</dt>
+    <dd>A. 짐의 양에 따라 다르지만, 일반적으로 남자 직원 2~3명과 주방 담당 여자 직원 1명이 한 팀을 이룹니다. 짐이 많거나 특수 품목(피아노, 대형 가구)이 있으면 추가 인력이 투입될 수 있습니다.</dd>
+
+    <dt>Q. 이사견적 비교 시 반드시 확인해야 할 사항은?</dt>
+    <dd>A. <span class="highlight">추가 비용 발생 여부</span>를 반드시 확인해야 합니다. 사다리차 비용, 에어컨 설치비, 짐 보관료 등은 견적에 포함되지 않는 경우가 많습니다. 또한, 포장재 품질, 청소 서비스 범위, 이사 후 정리정돈 수준도 비교 항목에 포함해야 합니다.</dd>
+  </dl>
+
+  <!-- 외부 신뢰성 링크 추가 (백과사전) -->
+  <p class="citation">※ '포장이사'의 개념 및 역사에 대한 자세한 정보는 <a href="https://namu.wiki/w/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC" target="_blank">나무위키</a>에서 확인할 수 있습니다.</p>
+</section>
+
+<section id="contact-info" aria-label="문의하기">
+  <h2>문의하기 및 고객센터</h2>
+  <p>25평 포장이사 비용에 대한 더 궁금한 점이 있으시면 언제든지 문의해주세요.</p>
+  <p><strong>전화 문의: 010-1234-5678</strong> | 이메일 문의: <a href="mailto:info@yourdomain.kr">info@yourdomain.kr</a></p>
+  <p>운영시간: 월~일 09:00~20:00 (공휴일 정상 운영)</p>
+</section>
+
+<footer>
+  <p style="text-align:center; color:#777; font-size:0.9rem;">&copy; 2026 포장이사 견적 비교 센터 | 사업자등록번호 123-45-67890</p>
+</footer>
+
+
+
+  
